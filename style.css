@@ -1,0 +1,109 @@
+body {
+    background-color: gray;
+}
+
+#field {
+    border-style: ridge;
+    border-width: 10px;
+    float: left;
+    margin-left: 30px;
+    background-image: url("/field.jpg");
+    background-size: 1400px 900px;
+    width: 1400px;
+    height: 900px;
+}
+
+.editor {
+    float: left;
+    border-style: ridge;
+    width: 300px;
+    height: 900px;
+    margin-left: 10px;
+}
+
+.timeline {
+    float: left;
+    border-style: ridge;
+    height: 900px;
+    width: 100px;
+    margin-left: 10px;
+}
+
+.logo {
+    color: white;
+    text-align: center;
+    font-style: italic;
+}
+
+.player_title {
+    float: left;
+    width: 300px;
+    height: 40px;
+    font-size: large;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    color: white;
+    font-size: 25px;
+}
+
+.player {
+    float: left;
+    width: 300px;
+    height: 30px;
+}
+
+.Editor_confirm {
+    position: bottom;
+    width: 280px;
+    height: 30px;
+}
+
+.timeline_title {
+    float: left;
+    width: 100px;
+    height: 40px;
+    font-size: large;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-size: 23px;
+    color: white;
+}
+
+.info {
+    float: left;
+    width: 280px;
+    margin-left: 10px;
+    height: 162px;
+    margin-top: 10px;
+    border-style: solid;
+    border-width: 1px;
+    padding-top: 5px;
+}
+
+.infobox {
+    width: 280px;
+    height: 30px;
+    padding-top: 3px;
+    margin-left: 10px;
+}
+
+label {
+    color: white;
+    padding-top: 10px;
+}
+
+.timeline_button {
+    float: left;
+    width: 100px;
+    height: 30px;
+}
+
+#line {
+    margin-top: 10px;
+    float: left;
+    width: 100px;
+    height: 750px;
+    overflow: auto;
+}

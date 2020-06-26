@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Soccer Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <svg id="field"></svg>
+        <div class="editor">
+            <p class="player_title">Player List</p>
+
+            <button class="player" id="button_home1" onclick="playerClick('home1')">Home player 1</button>
+            <button class="player" id="button_home2" onclick="playerClick('home2')">Home player 2</button>
+            <button class="player" id="button_home3" onclick="playerClick('home3')">Home player 3</button>
+            <button class="player" id="button_home4" onclick="playerClick('home4')">Home player 4</button>
+            <button class="player" id="button_home5" onclick="playerClick('home5')">Home player 5</button>
+            <button class="player" id="button_home6" onclick="playerClick('home6')">Home player 6</button>
+            <button class="player" id="button_home7" onclick="playerClick('home7')">Home player 7</button>
+            <button class="player" id="button_home8" onclick="playerClick('home8')">Home player 8</button>
+            <button class="player" id="button_home9" onclick="playerClick('home9')">Home player 9</button>
+            <button class="player" id="button_home10" onclick="playerClick('home10')">Home player 10</button>
+            <button class="player" id="button_home11" onclick="playerClick('home11')">Home player 11</button>
+            <button class="player" id="button_away1" onclick="playerClick('away1')">Away player 1</button>
+            <button class="player" id="button_away2" onclick="playerClick('away2')">Away player 2</button>
+            <button class="player" id="button_away3" onclick="playerClick('away3')">Away player 3</button>
+            <button class="player" id="button_away4" onclick="playerClick('away4')">Away player 4</button>
+            <button class="player" id="button_away5" onclick="playerClick('away5')">Away player 5</button>
+            <button class="player" id="button_away6" onclick="playerClick('away6')">Away player 6</button>
+            <button class="player" id="button_away7" onclick="playerClick('away7')">Away player 7</button>
+            <button class="player" id="button_away8" onclick="playerClick('away8')">Away player 8</button>
+            <button class="player" id="button_away9" onclick="playerClick('away9')">Away player 9</button>
+            <button class="player" id="button_away10" onclick="playerClick('away10')">Away player 10</button>
+            <button class="player" id="button_away11" onclick="playerClick('away11')">Away player 11</button>
+
+            <div class="info">
+                <div class="infobox">
+                    <label for="name">Name....</label>
+                    <input type="text" placeholder="name" id="name" oninput="nameChange(this.value)"></input>
+                </div>
+                <div class="infobox">
+                    <label for="position">Position</label>
+                    <input type="text" placeholder="position" id="position" oninput="posChange(this.value)"></input>
+                </div>
+                <div class="infobox">
+                    <label for="number">Number</label>
+                    <input type="number" placeholder="0" id="number" oninput="numChange(this.value)"></input>
+                </div>
+                <div class="infobox">
+                    <label for="change">Change.</label>
+                    <input type="text" placeholder="none" id="change" oninput="chgChange(this.value)"></input>
+                </div>
+                <button class="Editor_confirm" onclick="getSetting()">Save</button>
+            </div>
+
+        </div>
+
+        <div id="time" class="timeline">
+            <p class="timeline_title">Timeline</p>
+            <button class="timeline_button" onclick="saveTime()">Save</button>
+            <button class="timeline_button">Delete</button>
+            <button class="timeline_button">Play</button>
+            <div id="line"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="text/javascript" src="player_script.js"></script>
+</body>
+
+<footer class="logo">
+    Developed by Studio WITHBE
+</footer>
+
+</html>
