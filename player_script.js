@@ -47,13 +47,10 @@ function searchPlayer(target) {
     }
 }
 
+// SVG 필드에서 클릭 -> 이동 관련
 var svg = d3.select("body").select("#field")
     .on("click", function() {
-        // 좌표 계산용
-        console.log(d3.mouse(this))
-
         if (selected_player != "none") {
-            console.log(selected_player)
             var target_circle = svg.select("#" + selected_player)
             var x = d3.mouse(this)[0]
             var y = d3.mouse(this)[1]
@@ -71,7 +68,6 @@ var svg = d3.select("body").select("#field")
 
 function setup(str) {
     var tmp = searchPlayer(str)
-    console.log(tmp)
     svg.select("#name")
         .attr("value", function(tmp) { return tmp.Name })
     svg.select("#position")
@@ -168,10 +164,18 @@ function setGK() {
         .attr("cx", 142)
         .attr("cy", 450)
 
+    var tmp = searchPlayer("home1")
+    tmp.PosX = 142
+    tmp.PosY = 450
+
     var awayGK = svg.selectAll("g")
         .select("#away1")
         .attr("cx", 1255)
         .attr("cy", 450)
+
+    tmp = searchPlayer("away1")
+    tmp.PosX = 1255
+    tmp.PosY = 450
 }
 
 function setDF() {
@@ -182,6 +186,10 @@ function setDF() {
             .attr("cy", function() {
                 return 170 + (i - 2) * 185
             })
+
+        var tmp = searchPlayer("home" + i.toString())
+        tmp.PosX = 284
+        tmp.PosY = 170 + (i - 2) * 185
     }
 
     for (var i = 2; i < 6; i++) {
@@ -191,6 +199,10 @@ function setDF() {
             .attr("cy", function() {
                 return 170 + (i - 2) * 185
             })
+
+        var tmp = searchPlayer("away" + i.toString())
+        tmp.PosX = 1110
+        tmp.PosY = 170 + (i - 2) * 185
     }
 }
 
@@ -202,6 +214,10 @@ function setMF() {
             .attr("cy", function() {
                 return 170 + (i - 6) * 185
             })
+
+        var tmp = searchPlayer("home" + i.toString())
+        tmp.PosX = 447
+        tmp.PosY = 170 + (i - 6) * 185
     }
 
     for (var i = 6; i < 10; i++) {
@@ -211,6 +227,10 @@ function setMF() {
             .attr("cy", function() {
                 return 170 + (i - 6) * 185
             })
+
+        var tmp = searchPlayer("away" + i.toString())
+        tmp.PosX = 945
+        tmp.PosY = 170 + (i - 6) * 185
     }
 }
 
@@ -222,6 +242,10 @@ function setFW() {
             .attr("cy", function() {
                 return 355 + (i - 10) * 185
             })
+
+        var tmp = searchPlayer("home" + i.toString())
+        tmp.PosX = 620
+        tmp.PosY = 355 + (i - 10) * 185
     }
 
     for (var i = 10; i < 12; i++) {
@@ -231,6 +255,10 @@ function setFW() {
             .attr("cy", function() {
                 return 355 + (i - 10) * 185
             })
+
+        var tmp = searchPlayer("away" + i.toString())
+        tmp.PosX = 780
+        tmp.PosY = 355 + (i - 10) * 185
     }
 }
 
@@ -278,21 +306,81 @@ function getSetting() {
         tmp.PosX = d3.select("#" + selected_player).attr("cx")
         tmp.PosY = d3.select("#" + selected_player).attr("cy")
 
-        document.getElementById("button_" + tmp.tag).innerHTML = name_input
+        document.getElementById("button_" + tmp.tag).innerHTML = name_input + " (" + num_input + ", " + pos_input + ")"
     }
 }
 
 // 타임라인에서 지정한 타임으로 플레이어 위치 변경
 function goto(num) {
+    var index = num.substring(4, num.length)
+    var selected_time = timeline[index - 1]
+    var timeHome = selected_time.homeState
+    var timeAway = selected_time.awayState
 
+    for (var i = 0; i < timeHome.length; i++) {
+        svg.select("#home" + (i + 1).toString())
+            .transition()
+            .attr("cx", timeHome[i].PosX.toString())
+            .attr("cy", timeHome[i].PosY.toString())
+    }
+
+    for (var i = 0; i < timeAway.length; i++) {
+        svg.select("#away" + (i + 1).toString())
+            .transition()
+            .attr("cx", timeAway[i].PosX.toString())
+            .attr("cy", timeAway[i].PosY.toString())
+    }
+}
+
+function play() {
+    if (timeline.length < 1) {
+        alert("There is no timeline.")
+        return
+    }
+
+    alert("Sorry : 1.0 release version doesn't support this function.")
+    return
+
+    for (var i = 1; i <= timeline.length; i++) {
+        goto("time" + i.toString())
+    }
 }
 
 // 타임라인 Save 기능
 function saveTime() {
+    var tmpHome = []
+    var tmpAway = []
+
+    for (var i = 1; i <= 11; i++) {
+        var tmp1 = {
+            tag: "home" + i.toString(),
+            Name: home[i - 1].Name,
+            Pos: home[i - 1].Pos,
+            Num: home[i - 1].Num,
+            Change: home[i - 1].Change,
+            PosX: home[i - 1].PosX,
+            PosY: home[i - 1].PosY
+        }
+
+        tmpHome.push(tmp1)
+
+        var tmp2 = {
+            tag: "away" + i.toString(),
+            Name: away[i - 1].Name,
+            Pos: away[i - 1].Pos,
+            Num: away[i - 1].Num,
+            Change: away[i - 1].Change,
+            PosX: away[i - 1].PosX,
+            PosY: away[i - 1].PosY
+        }
+
+        tmpAway.push(tmp2)
+    }
+
     var now = {
         time: "time" + (timeline.length + 1).toString(),
-        homeState: home,
-        awayState: away
+        homeState: tmpHome,
+        awayState: tmpAway
     }
 
     timeline.push(now)
@@ -303,7 +391,7 @@ function saveTime() {
         .style("width", "70px")
         .style("height", "30px")
         .attr("onclick", function() {
-            return "goto(" + now.time.toString() + ")"
+            return "goto(" + "'" + now.time.toString() + "'" + ")"
         })
 
     document.getElementById(now.time).innerHTML = now.time
@@ -311,5 +399,11 @@ function saveTime() {
 
 // 마지막 타임라인 제거
 function deleteTime() {
-
+    if (timeline.length > 0) {
+        var last = "time" + timeline.length.toString()
+        d3.select("#" + last).remove()
+        timeline.pop()
+    } else {
+        alert("There is no timeline.")
+    }
 }
